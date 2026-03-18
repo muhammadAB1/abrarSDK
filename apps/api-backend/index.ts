@@ -3,7 +3,7 @@ import type { Messages } from './types.js';
 import { Gemini } from './llm/Gemini.js';
 // import { OpenAi } from './llm/OpenAi';
 // import { Claude } from './llm/Claude';
-import { prisma } from 'db'
+import { prisma } from '../../packages/db/index.js'
 import type { LlmResponse } from './llm/base.js';
 
 const app = express();
