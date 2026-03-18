@@ -1,5 +1,5 @@
-import { type Messages } from "../types";
-import { BaseLlm, type LlmResponse } from "./base";
+import { type Messages } from "../types.js";
+import { BaseLlm, type LlmResponse } from "./base.js";
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
