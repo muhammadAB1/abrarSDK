@@ -115,4 +115,5 @@ app.post('/conversation', async (req: Request, res: Response) => {
     return res.json(response);
 })
 
-app.listen(4000, () => { console.log('app listening on port 4000') });
+// app.listen(4000, () => { console.log('app listening on port 4000') });
+export default app;

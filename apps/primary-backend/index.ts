@@ -20,7 +20,7 @@ app.use('/openrouter/api', apiRoutes)
 app.use('/openrouter/model/', modelRoutes)
 app.use('/openrouter/payment/', paymentRoutes)
 
-app.listen(process.env.PORT, () => { console.log('app listening on port 5000') });
+export default app;
 
 
 
