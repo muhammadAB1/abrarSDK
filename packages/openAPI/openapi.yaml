@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: Abrar AI API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:4000
+
+paths:
+  /conversation:
+    post:
+      summary: Chat with LLM
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - model
+                - messages
+              properties:
+                model:
+                  type: string
+                messages:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      role:
+                        type: string
+                      content:
+                        type: string
+
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inputTokensConsumed:
+                    type: number
+                  outputTokensConsumed:
+                    type: number
+                  completions:
+                    type: object
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
