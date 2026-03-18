@@ -90,7 +90,7 @@ app.post('/conversation', async (req: Request, res: Response) => {
 
     const creditsUsed = (response.inputTokensConsumed * provider!.inputTokenCost + response.outputTokensConsumed * provider!.outputTokenCost) / 10;
 
-    const res1 = await prisma.user.update({
+    await prisma.user.update({
         where: {
             id: apiKeyDb.user.id
         },
@@ -101,7 +101,7 @@ app.post('/conversation', async (req: Request, res: Response) => {
         }
     });
 
-    const res2 = await prisma.apiKey.update({
+    await prisma.apiKey.update({
         where: {
             apiKey: apiKey
         },
