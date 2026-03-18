@@ -1,8 +1,8 @@
 import express, { type Request, type Response } from 'express'
 import type { Messages } from './types';
 import { Gemini } from './llm/Gemini';
-import { OpenAi } from './llm/OpenAi';
-import { Claude } from './llm/Claude';
+// import { OpenAi } from './llm/OpenAi';
+// import { Claude } from './llm/Claude';
 import { prisma } from 'db'
 import type { LlmResponse } from './llm/base';
 
