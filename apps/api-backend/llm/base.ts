@@ -1,4 +1,4 @@
-import { type Messages } from "../types";
+import { type Messages } from "../types.js";
 
 export type LlmResponse = {
     completions: {
