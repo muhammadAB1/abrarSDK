@@ -1,0 +1,237 @@
+bhai zara baat ab gaur se suno mera project hai monorepo ka jo bun se initialize hai aur express ka server hai or react ka frontend hai aur prisma use hua hai packages k folder k andar db k folder mein aur saath hi poora project typescripy mai hai ab mujhey backend vercel pe deploy krna hai
+
+I want you to tell me step by step to do what keeping all the things in mind that I have mentioned to successfully deploy the project also search for everything do not hallucinate
+
+Theek hai bhai — main tumhein real, production-safe, non-hallucinated step-by-step guide deta hoon based on actual Vercel + Bun + Express + Prisma + Monorepo docs.
+
+Tumhara setup:
+
+Monorepo (packages folder etc.)
+
+Bun runtime
+
+Express backend
+
+React frontend (separate)
+
+Prisma in packages/db
+
+TypeScript everywhere
+👉 Goal: sirf backend (Express) Vercel pe deploy karna
+
+⚠️ Sabse pehli IMPORTANT baat (ignore mat karna)
+
+Vercel serverless functions use karta hai (normal Express server nahi chalta directly)
+
+Lekin:
+
+Express supported hai ✔️
+
+Bun runtime supported hai (but limited)
+
+❗ app.listen() wala server kaam nahi karega — tumhein serverless handler export karna padega
+
+✅ HIGH-LEVEL STRATEGY
+
+Tum backend ko is tarah deploy karoge:
+
+apps/
+  backend/   <-- ye deploy hoga
+packages/
+  db/        <-- prisma yahan hai
+
+Aur Vercel mein:
+👉 sirf backend folder ko project banaoge (monorepo root nahi)
+
+🧩 STEP 1 — Express ko Vercel-compatible banao
+❌ Galat (normal express)
+app.listen(3000)
+✅ Sahi (serverless)
+
+Install:
+
+bun add serverless-http
+
+Phir:
+
+import express from "express"
+import serverless from "serverless-http"
+
+const app = express()
+
+app.get("/", (req, res) => {
+  res.json({ message: "Hello from Vercel" })
+})
+
+export const handler = serverless(app)
+
+👉 Ye required hai kyunki Vercel functions handler export mangta hai
+
+🧩 STEP 2 — Folder structure sahi karo
+
+Backend folder ke andar:
+
+backend/
+  api/
+    index.ts   <-- entry point (IMPORTANT)
+  package.json
+  tsconfig.json
+
+👉 Vercel automatically api/ folder ko functions bana deta hai
+
+🧩 STEP 3 — api/index.ts
+import { handler } from "../src/app" // ya jahan tumhara express hai
+
+export default handler
+🧩 STEP 4 — Bun config add karo
+
+Root ya backend mein vercel.json:
+
+{
+  "bunVersion": "1.x"
+}
+
+👉 Ye official requirement hai
+
+🧩 STEP 5 — Prisma setup fix karo (VERY IMPORTANT)
+1. package.json mein:
+{
+  "scripts": {
+    "postinstall": "prisma generate"
+  }
+}
+
+👉 warna deploy pe Prisma client nahi banega
+
+2. ENV variable
+
+Vercel dashboard mein add karo:
+
+DATABASE_URL=your_db_url
+
+👉 bina iske Prisma fail ho jayega
+
+3. Monorepo case (tumhara case)
+
+Agar Prisma packages/db mein hai:
+
+👉 ensure karo:
+
+backend us package ko import kare
+
+aur build ke waqt accessible ho
+
+Example:
+
+import { prisma } from "@repo/db"
+🧩 STEP 6 — Build config (TypeScript)
+
+Agar TS use ho raha hai:
+
+👉 ensure karo build ho raha ho:
+
+package.json:
+
+{
+  "scripts": {
+    "build": "tsc"
+  }
+}
+
+Vercel settings mein:
+
+Build Command: bun run build
+🧩 STEP 7 — Monorepo deploy (CRITICAL STEP)
+Option A (recommended)
+
+👉 Vercel dashboard:
+
+Import repo
+
+Root Directory = backend folder ⚠️
+
+Deploy
+
+👉 ye official way hai monorepo ke liye
+
+Option B (CLI)
+vercel link
+vercel deploy
+🧩 STEP 8 — Local test (before deploy)
+vercel dev
+
+👉 ye simulate karega Vercel environment
+
+🧩 STEP 9 — Deploy
+vercel deploy
+⚠️ COMMON ERRORS (tum almost pakka face karoge)
+❌ 1. "Cannot find prisma client"
+
+✔️ fix: postinstall: prisma generate
+
+❌ 2. DB connection crash
+
+✔️ fix: connection pooling use karo (recommended)
+
+❌ 3. Monorepo imports fail
+
+✔️ fix:
+
+tsconfig paths
+
+ya build ke waqt packages compile karo
+
+❌ 4. Express not working
+
+✔️ fix:
+
+serverless-http use karo
+
+app.listen hatao
+
+💡 REALITY CHECK (important advice)
+
+Sach bataun:
+
+👉 Vercel backend (Express + Prisma + Bun + monorepo) = tricky combo
+
+Agar production serious hai:
+
+👉 better options:
+
+Railway
+
+Render
+
+Fly.io
+
+BUT agar Vercel hi chahiye:
+✔️ upar wala setup 100% correct path hai
+
+🚀 FINAL SUMMARY
+
+Tumhein ye karna hai:
+
+Express → serverless handler
+
+api/ folder use karo
+
+Bun config add karo
+
+Prisma:
+
+postinstall
+
+env vars
+
+Monorepo:
+
+root directory = backend
+
+Deploy via Vercel
+
+Agar tum chaho to:
+👉 apna folder structure paste karo
+👉 main tumhare exact repo ke hisaab se config likh deta hoon (vercel.json + tsconfig + imports)
+
+warna generic guide se mistakes ho jati hain 👍
