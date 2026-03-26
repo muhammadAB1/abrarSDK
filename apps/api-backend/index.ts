@@ -9,6 +9,10 @@ import type { LlmResponse } from './llm/base.js';
 const app = express();
 app.use(express.json())
 
+app.get('/', (req, res) => {
+    res.json({message: "Hello World"})
+})
+
 
 app.post('/conversation', async (req: Request, res: Response) => {
     const { model, messages }: { model: string, messages: Messages } = req.body;
