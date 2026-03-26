@@ -9,7 +9,7 @@ import type { LlmResponse } from './llm/base';
 const app = express();
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.json({message: "Hello World"})
 })
 
@@ -70,7 +70,7 @@ app.post('/conversation', async (req: Request, res: Response) => {
     let response: LlmResponse | null = null
 
     if (provider?.provider.name === 'Google API') {
-        const response = await Gemini.chat(provideModelName!, messages)
+        response = await Gemini.chat(provideModelName!, messages)
         res.status(200).json(response)
     }
     if (provider?.provider.name === "Google Vertex") {
