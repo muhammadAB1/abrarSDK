@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
-import type { Messages } from "../types.js";
-import { BaseLlm, type LlmResponse } from "./base.js";
+import type { Messages } from "../types";
+import { BaseLlm, type LlmResponse } from "./base";
 import { type TextBlock } from "@anthropic-ai/sdk/resources";
 
 const client = new Anthropic({

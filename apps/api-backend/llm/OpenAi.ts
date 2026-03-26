@@ -1,5 +1,5 @@
-import { type Messages } from "../types.js";
-import { BaseLlm, type LlmResponse } from "./base.js";
+import { type Messages } from "../types";
+import { BaseLlm, type LlmResponse } from "./base";
 import OpenAI from "openai";
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
