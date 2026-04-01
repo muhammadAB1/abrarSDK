@@ -92,7 +92,7 @@ app.post('/conversation', async (req: Request, res: Response) => {
             message: "No provider found for this model"
         })
     }
-
+    type Test = Response;
     const creditsUsed = (response.inputTokensConsumed * provider!.inputTokenCost + response.outputTokensConsumed * provider!.outputTokenCost) / 10;
 
     await prisma.user.update({
