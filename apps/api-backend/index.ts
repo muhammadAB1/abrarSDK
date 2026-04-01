@@ -68,14 +68,14 @@ app.post('/conversation', async (req: Request, res: Response) => {
 
     const provider = providers[Math.floor(Math.random() * providers.length)]
 
-    let response: LlmResponse | null = null
+    let response1: LlmResponse | null = null
 
     if (provider?.provider.name === 'Google API') {
-        const response = await Gemini.chat(provideModelName!, messages)
-        res.status(200).json(response)
+        response1 = await Gemini.chat(provideModelName!, messages)
+        res.status(200).json(response1)
     }
     if (provider?.provider.name === "Google Vertex") {
-        response = await Gemini.chat(provideModelName!, messages)
+        response1 = await Gemini.chat(provideModelName!, messages)
     }
 
     // if (companyName === 'OpenAI') {
@@ -87,13 +87,12 @@ app.post('/conversation', async (req: Request, res: Response) => {
     //     res.status(200).json(response)
     // }
 
-    if (!response) {
+    if (!response1) {
         return res.status(403).json({
             message: "No provider found for this model"
         })
     }
-    type Test = Response;
-    const creditsUsed = (response.inputTokensConsumed * provider!.inputTokenCost + response.outputTokensConsumed * provider!.outputTokenCost) / 10;
+    const creditsUsed = (response1.inputTokensConsumed * provider!.inputTokenCost + response1.outputTokensConsumed * provider!.outputTokenCost) / 10;
 
     await prisma.user.update({
         where: {
@@ -117,7 +116,7 @@ app.post('/conversation', async (req: Request, res: Response) => {
         }
     })
 
-    return res.json(response);
+    return res.json(response1);
 })
 
 // app.listen(4000, () => { console.log('app listening on port 4000') });
