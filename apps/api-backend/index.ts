@@ -1,4 +1,5 @@
-import express, { type Request, type Response } from 'express'
+import express from 'express'
+import type { Request, Response } from 'express'
 import type { Messages } from './types';
 import { Gemini } from './llm/Gemini';
 // import { OpenAi } from './llm/OpenAi';
@@ -10,7 +11,7 @@ const app = express();
 app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
-    res.json({message: "Hello World"})
+    res.json({ message: "Hello World" })
 })
 
 
