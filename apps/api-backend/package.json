@@ -15,7 +15,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "db": "*",
+    "db": "workspace:*",
     "@anthropic-ai/sdk": "^0.78.0",
     "@google/genai": "^1.44.0",
     "@types/express": "^5.0.6",
