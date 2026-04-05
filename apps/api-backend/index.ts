@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { type Request, type Response } from 'express'
 import type { Messages } from './types';
 import { Gemini } from './llm/Gemini';
 // import { OpenAi } from './llm/OpenAi';
@@ -9,12 +9,12 @@ import type { LlmResponse } from './llm/base';
 const app = express();
 app.use(express.json())
 
-app.get('/', (req: any, res: any) => {
+app.get('/', (req: Request, res: Response) => {
     res.json({ message: "Hello World" })
 })
 
 
-app.post('/conversation', async (req: any, res: any) => {
+app.post('/conversation', async (req: Request, res: Response) => {
     const { model, messages }: { model: string, messages: Messages } = req.body;
     const [companyName, provideModelName] = model.split('/');
 
