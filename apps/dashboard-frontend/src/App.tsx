@@ -8,18 +8,8 @@ import { ApiKeys } from "./pages/ApiKeys";
 import { LandingPage } from "./pages/LandingPage";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { abrarSDK } from '@abrar/sdk'
 
 export function App() {
-
-  const client = new abrarSDK({
-    apiKey: 'abrar'
-  })
-
-  client.chat({
-    model: 'google/gemeni-3-flash-preview',
-    messages: []
-  })
 
   const queryClient = new QueryClient();
 

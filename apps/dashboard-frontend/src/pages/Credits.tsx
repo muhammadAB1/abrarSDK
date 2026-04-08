@@ -17,6 +17,7 @@ import {
   Wallet,
   TrendingUp,
 } from "lucide-react";
+import { url } from "@/url";
 
 export function Credits() {
   const queryClient = useQueryClient();
@@ -24,7 +25,7 @@ export function Credits() {
   const apiKeysQuery = useQuery({
     queryKey: ["api-keys"],
     queryFn: async () => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/api`, {
+      const response = fetch(`${url}/openrouter/api`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ export function Credits() {
   const userProfileQuery = useQuery({
     queryKey: ["user-profile"],
     queryFn: async () => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/auth/credits`, {
+      const response = fetch(`${url}/openrouter/auth/credits`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +64,7 @@ export function Credits() {
 
   const onrampMutation = useMutation({
     mutationFn: async () => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/payment/credits`, {
+      const response = fetch(`${url}/openrouter/payment/credits`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

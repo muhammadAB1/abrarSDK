@@ -20,8 +20,11 @@ app.use('/openrouter/api', apiRoutes)
 app.use('/openrouter/model/', modelRoutes)
 app.use('/openrouter/payment/', paymentRoutes)
 
-export default app;
+//export default app;
 
+app.listen(5000, () => {
+    console.log()
+})
 
 
 /*

@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
+import { url } from '@/url'
 
 const Signup = () => {
 
@@ -15,7 +16,7 @@ const Signup = () => {
 
     const mutation = useMutation({
         mutationFn: async ({ email, password }: { email: string, password: string }) => {
-            const response = fetch(`${process.env.BACKEND_URL}/openrouter/auth/signup`, {
+            const response = fetch(`${url}/openrouter/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

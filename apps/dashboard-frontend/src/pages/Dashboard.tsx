@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { DashboardLayout } from "@/components/DashboardLayout";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 import {
@@ -11,12 +11,13 @@ import {
   Loader2,
   Layers,
 } from "lucide-react";
+import { url } from "@/url";
 
 export function Dashboard() {
   const apiKeysQuery = useQuery({
     queryKey: ["api-keys"],
     queryFn: async () => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/api`, {
+      const response = fetch(`${url}/openrouter/api`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ export function Dashboard() {
   const modelsQuery = useQuery({
     queryKey: ["models"],
     queryFn: async () => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/model/models`, {
+      const response = fetch(`${url}/openrouter/model/models`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

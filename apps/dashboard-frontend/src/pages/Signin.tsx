@@ -14,6 +14,8 @@ import {
     CardFooter,
 } from "@/components/ui/card";
 import { ArrowRight, Mail, Lock, Loader2, AlertCircle, CheckCircle2, Zap } from "lucide-react";
+import { url } from "@/url";
+import { errorMonitor } from "events";
 
 export function Signin() {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -28,7 +30,7 @@ export function Signin() {
             email: string;
             password: string;
         }) => {
-            const response = fetch(`${process.env.BACKEND_URL}/openrouter/auth/login`, {
+            const response = fetch(`${url}/openrouter/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

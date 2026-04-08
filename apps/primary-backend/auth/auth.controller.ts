@@ -6,7 +6,6 @@ import jwt from 'jsonwebtoken'
 export const signin = async (req: Request, res: Response) => {
     try {
         const { email, password } = AuthModelSignin.signinSchema.parse(req.body)
-        console.log(prisma.apiKey)
         const user = await prisma.user.findFirst({
             where: {
                 email
@@ -20,8 +19,11 @@ export const signin = async (req: Request, res: Response) => {
         }
 
         const matched = await Bun.password.verify(password, user.password)
+
         if (!matched) {
-            throw new Error('incorrect credentials')
+            return res.status(401).json({
+                message: 'incorrect credentials'
+            })
         }
 
         const token = jwt.sign(
@@ -35,7 +37,6 @@ export const signin = async (req: Request, res: Response) => {
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
-
 
         res.status(200).send({ message: 'Signed in successfully' })
 

@@ -24,6 +24,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
+import { url } from "@/url";
 
 export function ApiKeys() {
   const queryClient = useQueryClient();
@@ -35,7 +36,7 @@ export function ApiKeys() {
   const apiKeysQuery = useQuery({
     queryKey: ["api-keys"],
     queryFn: async () => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/api`, {
+      const response = fetch(`${url}/openrouter/api`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ export function ApiKeys() {
 
   const createMutation = useMutation({
     mutationFn: async (name: string) => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/api/`, {
+      const response = fetch(`${url}/openrouter/api/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +81,7 @@ export function ApiKeys() {
 
   const toggleMutation = useMutation({
     mutationFn: async ({ id, disabled }: { id: string; disabled: boolean }) => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/api`, {
+      const response = fetch(`${url}/openrouter/api`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +104,7 @@ export function ApiKeys() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const response = fetch(`${process.env.BACKEND_URL}/openrouter/api/${id}`, {
+      const response = fetch(`${url}/openrouter/api/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

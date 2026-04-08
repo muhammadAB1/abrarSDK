@@ -10,6 +10,7 @@ import {
     Code2,
     Layers,
 } from "lucide-react";
+import { url } from "@/url";
 
 const features = [
     {
@@ -48,7 +49,7 @@ export function LandingPage() {
     const modelsQuery = useQuery({
         queryKey: ['models'],
         queryFn: async () => {
-            const response = fetch(`${process.env.BACKEND_URL}/openrouter/model/models`, {
+            const response = fetch(`${url}/openrouter/model/models`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -167,7 +168,7 @@ export function LandingPage() {
                                     <span className="text-blue-400">{"await "}</span>
                                     <span className="text-yellow-300">{"fetch"}</span>
                                     <span className="text-foreground">{"(\n"}</span>
-                                    <span className="text-emerald-400">{`  "${process.env.BACKEND_URL}/conversation"`}</span>
+                                    <span className="text-emerald-400">{`  "${`http://localhost:5000`}/conversation"`}</span>
                                     <span className="text-foreground">{",\n  { "}</span>
                                     <span className="text-foreground">{"method: "}</span>
                                     <span className="text-emerald-400">{'"POST"'}</span>
