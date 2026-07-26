@@ -9,8 +9,14 @@ import {
     BarChart3,
     Code2,
     Layers,
+    Loader2,
+    LoaderPinwheelIcon,
+    LucideLoaderCircle,
+    LucideLoaderPinwheel,
+    Loader2Icon,
 } from "lucide-react";
 import { url } from "@/url";
+import { useAuth } from "@/contexts/AuthContext";
 
 const features = [
     {
@@ -46,6 +52,9 @@ const features = [
 ];
 
 export function LandingPage() {
+
+    const { user, isLoading } = useAuth();
+
     const modelsQuery = useQuery({
         queryKey: ['models'],
         queryFn: async () => {
@@ -82,15 +91,21 @@ export function LandingPage() {
                         </span>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" asChild>
-                            <Link to="/signin">Sign in</Link>
-                        </Button>
-                        <Button size="sm" asChild>
-
-                            <Link to="/signup">
-                                Get started
-                                <ArrowRight className="size-3.5" />
-                            </Link>
+                        <Button size="sm" className="w-auto">
+                            {
+                                isLoading ? (
+                                    <Loader2Icon className="size-3.5 animate-spin" />
+                                ) : (
+                                    <Link
+                                        className="w-full h-full flex"
+                                        to={user ? "/dashboard" : "/signup"}
+                                        aria-disabled={isLoading}
+                                        tabIndex={isLoading ? -1 : 0}
+                                    >
+                                        {user ? "Dashboard" : <div className="flex items-center gap-1">Get started <ArrowRight className="size-3.5" /></div>}
+                                    </Link>
+                                )
+                            }
                         </Button>
                     </div>
                 </div>
@@ -100,7 +115,7 @@ export function LandingPage() {
             <section className="relative pt-32 pb-24 overflow-hidden">
                 {/* Background effects */}
                 <div
-                    className="absolute w-[800px] h-[800px] rounded-full opacity-[0.06] blur-[150px]"
+                    className="absolute w-200 h-200 rounded-full opacity-[0.06] blur-[150px]"
                     style={{
                         background: "radial-gradient(circle, oklch(0.7 0.15 55) 0%, transparent 70%)",
                         top: "-20%",

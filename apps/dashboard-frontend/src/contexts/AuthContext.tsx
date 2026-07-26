@@ -29,7 +29,6 @@ async function fetchMe(): Promise<AuthUser | null> {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  console.log("first");
   const queryClient = useQueryClient();
 
 
@@ -52,14 +51,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       credentials: "include",
     });
     queryClient.setQueryData(['auth'], null);
-  }
-
-  if (isLoading) {
-    return (
-      <div className="dark min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="size-6 animate-spin text-muted-foreground" />
-      </div>
-    );
   }
 
   return (

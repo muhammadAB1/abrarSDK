@@ -60,7 +60,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                     {user && (
                         <div className="px-3 py-1.5">
                             <p className="text-xs text-muted-foreground truncate" title={user.email}>
-                                {user.email}
+                                {user.email.split('@')[0]}
                             </p>
                         </div>
                     )}
