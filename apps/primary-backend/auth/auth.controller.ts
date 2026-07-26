@@ -1,7 +1,7 @@
 import { type Request, type Response } from 'express'
 import { AuthModelSignin, AuthModelSignup } from './types'
 import { prisma } from 'db'
-import jwt from 'jsonwebtoken'
+import { setAuthCookie } from './session'
 
 export const signin = async (req: Request, res: Response) => {
     try {
@@ -26,18 +26,7 @@ export const signin = async (req: Request, res: Response) => {
             })
         }
 
-        const token = jwt.sign(
-            { userId: user.id.toString() },
-            process.env.JWT_SECRET as string,
-            { expiresIn: '7d' },
-
-        )
-        res.cookie('auth', token, {
-            httpOnly: true,
-            sameSite: "strict",
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        })
-
+        setAuthCookie(res, user.id.toString())
         res.status(200).send({ message: 'Signed in successfully' })
 
 
@@ -68,6 +57,30 @@ export const signup = async (req: Request, res: Response) => {
         )
     }
 
+}
+
+export const me = async (req: Request, res: Response) => {
+    const userId = parseInt(req.user);
+
+    const user = await prisma.user.findFirst({
+        where: { id: userId },
+        select: {
+            id: true,
+            email: true,
+            credits: true,
+        },
+    })
+
+    if (!user) {
+        return res.status(401).json({ message: 'Unauthorized' })
+    }
+
+    res.status(200).json(user)
+}
+
+export const logout = async (_req: Request, res: Response) => {
+    res.clearCookie('auth')
+    res.status(200).json({ message: 'Signed out successfully' })
 }
 
 export const credits = async (req: Request, res: Response) => {

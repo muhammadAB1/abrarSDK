@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import {
   Key,
   Coins,
@@ -32,6 +32,7 @@ export function Dashboard() {
         return await res.json();
       });
     },
+    refetchOnWindowFocus: false,
   });
 
   const modelsQuery = useQuery({
@@ -52,6 +53,7 @@ export function Dashboard() {
         return await res.json();
       });
     },
+    refetchOnWindowFocus: false,
   });
 
   const apiKeys = apiKeysQuery.data ?? [];

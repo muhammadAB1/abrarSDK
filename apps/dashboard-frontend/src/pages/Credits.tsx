@@ -39,7 +39,8 @@ export function Credits() {
         }
         return await res.json();
       });
-    },
+    },  
+    refetchOnWindowFocus: false,
   });
 
   const userProfileQuery = useQuery({
@@ -59,7 +60,8 @@ export function Credits() {
         }
         return await res.json();
       });
-    }
+    },
+    refetchOnWindowFocus: false,
   })
 
   const onrampMutation = useMutation({

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import {
@@ -63,6 +63,7 @@ export function LandingPage() {
                 return await res.json();
             });
         },
+        refetchOnWindowFocus: false,
     });
 
     const modelCount = modelsQuery.data?.models?.length ?? 200;

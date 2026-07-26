@@ -1,7 +1,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { useRef } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,12 +15,13 @@ import {
 } from "@/components/ui/card";
 import { ArrowRight, Mail, Lock, Loader2, AlertCircle, CheckCircle2, Zap } from "lucide-react";
 import { url } from "@/url";
-import { errorMonitor } from "events";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function Signin() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
+    const { refresh } = useAuth();
 
     const mutation = useMutation({
         mutationFn: async ({
@@ -46,8 +47,9 @@ export function Signin() {
                 return await res.json()
             })
         },
-        onSuccess: () => {
-            setTimeout(() => navigate("/dashboard"), 1500);
+        onSuccess: async () => {
+            await refresh();
+            navigate("/dashboard");
         },
     });
 

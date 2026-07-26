@@ -51,6 +51,7 @@ export function ApiKeys() {
         return await res.json();
       });
     },
+    refetchOnWindowFocus: false,
   });
 
   const createMutation = useMutation({

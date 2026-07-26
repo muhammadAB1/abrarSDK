@@ -43,13 +43,13 @@ export const getApiKey = async (req: Request, res: Response) => {
     })
 
     res.status(201).send(
-        apiKeys.map((apiKey): apiKeyModel.GetApiKeyResponse => ({
+        apiKeys.map((apiKey: typeof apiKeys[0]): apiKeyModel.GetApiKeyResponse => ({
             id: apiKey.id,
             name: apiKey.name,
-            apiKey: apiKey.apiKey,
-            lastUsed: apiKey.lastUsed,
-            creditConsumed: apiKey.creditsConsumed,
-            disabled: apiKey.disabled,
+            apiKey: apiKey.apiKey as string,
+            lastUsed: apiKey.lastUsed as Date,
+            creditConsumed: apiKey.creditsConsumed as number,
+            disabled: apiKey.disabled as boolean,
         }))
     )
 

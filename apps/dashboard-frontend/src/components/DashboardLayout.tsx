@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
     LayoutDashboard,
@@ -7,6 +7,7 @@ import {
     Zap,
     LogOut,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -16,6 +17,7 @@ const navItems = [
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
     const location = useLocation();
+    const { user, logout } = useAuth();
 
     return (
         <div className="dark min-h-screen bg-background flex">
@@ -54,9 +56,19 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 </nav>
 
                 {/* Footer */}
-                <div className="px-3 py-4 border-t border-border/50">
+                <div className="px-3 py-4 border-t border-border/50 space-y-2">
+                    {user && (
+                        <div className="px-3 py-1.5">
+                            <p className="text-xs text-muted-foreground truncate" title={user.email}>
+                                {user.email}
+                            </p>
+                        </div>
+                    )}
                     <Link
                         to="/signin"
+                        onClick={() => {
+                            void logout();
+                        }}
                         className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
                     >
                         <LogOut className="size-4" />
