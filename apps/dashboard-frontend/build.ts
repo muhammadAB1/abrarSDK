@@ -129,6 +129,8 @@ const result = await Bun.build({
   minify: true,
   target: "browser",
   sourcemap: "linked",
+  // Inline BUN_PUBLIC_* so the browser bundle never references `process`
+  env: "BUN_PUBLIC_*",
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),
   },
