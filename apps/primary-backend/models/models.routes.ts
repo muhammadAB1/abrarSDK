@@ -1,6 +1,6 @@
 import express from 'express'
 import { getModels, getProviders, getModelProviders } from './models.controller';
-import { authMiddleware } from '../middleware';
+import { authMiddleware } from '../auth.middleware';
 
 
 const router = express.Router();
