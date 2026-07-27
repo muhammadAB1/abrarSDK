@@ -102,7 +102,7 @@ export function LandingPage() {
                                         aria-disabled={isLoading}
                                         tabIndex={isLoading ? -1 : 0}
                                     >
-                                        {user ? "Dashboard" : <div className="flex items-center gap-1">Get started <ArrowRight className="size-3.5" /></div>}
+                                        {user ? <div className="flex items-center gap-1">Dashboard</div> : <div className="flex items-center gap-1">Get started <ArrowRight className="size-3.5" /></div>}
                                     </Link>
                                 )
                             }

@@ -57,7 +57,7 @@ export function Signin() {
         <div className="dark min-h-screen relative flex items-center justify-center bg-background overflow-hidden">
             {/* Animated gradient orbs */}
             <div
-                className="absolute w-[600px] h-[600px] rounded-full opacity-[0.07] blur-[120px] animate-pulse"
+                className="absolute w-150 h-150 rounded-full opacity-[0.07] blur-[120px] animate-pulse"
                 style={{
                     background:
                         "radial-gradient(circle, oklch(0.6 0.2 264) 0%, transparent 70%)",
@@ -67,7 +67,7 @@ export function Signin() {
                 }}
             />
             <div
-                className="absolute w-[500px] h-[500px] rounded-full opacity-[0.05] blur-[100px] animate-pulse"
+                className="absolute w-125 h-125 rounded-full opacity-[0.05] blur-[100px] animate-pulse"
                 style={{
                     background:
                         "radial-gradient(circle, oklch(0.7 0.15 55) 0%, transparent 70%)",
@@ -89,7 +89,7 @@ export function Signin() {
             />
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-[420px] px-6">
+            <div className="relative z-10 w-full max-w-105 px-6">
                 {/* Brand */}
                 <div className="flex items-center justify-center gap-2.5 mb-10">
                     <div className="flex items-center justify-center size-9 rounded-lg bg-primary/10 border border-primary/20">

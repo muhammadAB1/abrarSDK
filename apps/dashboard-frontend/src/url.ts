@@ -1,1 +1,1 @@
-export const url = 'http://localhost:5000'
+export const url = process.env.BUN_PUBLIC_BACKEND_URL
