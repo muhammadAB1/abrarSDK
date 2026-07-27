@@ -19,12 +19,15 @@ app.use('/openrouter/auth', authRoutes)
 app.use('/openrouter/api', apiRoutes)
 app.use('/openrouter/model/', modelRoutes)
 app.use('/openrouter/payment/', paymentRoutes)
-
-//export default app;
-
-app.listen(5000, () => {
-    console.log()
+app.get('/', (req, res) => {
+    res.send('Hello World')
 })
+
+export default app;
+
+// app.listen(5000, () => {
+//     console.log()
+// })
 
 
 /*
