@@ -177,14 +177,14 @@ export function LandingPage() {
                             </div>
                             <pre className="p-5 text-sm font-mono leading-relaxed overflow-x-auto">
                                 <code>
-                                    <span className="text-muted-foreground">{"// Just change the base URL — that's it\n"}</span>
+                                    {/* <span className="text-muted-foreground">{"// Just change the base URL — that's it\n"}</span> */}
                                     <span className="text-blue-400">{"const "}</span>
                                     <span className="text-foreground">{"response "}</span>
                                     <span className="text-muted-foreground">{"= "}</span>
                                     <span className="text-blue-400">{"await "}</span>
                                     <span className="text-yellow-300">{"fetch"}</span>
                                     <span className="text-foreground">{"(\n"}</span>
-                                    <span className="text-emerald-400">{`  "${`http://localhost:5000`}/conversation"`}</span>
+                                    <span className="text-emerald-400">{`  "${`https://abrar-sdk-api-backend.vercel.app`}/conversation"`}</span>
                                     <span className="text-foreground">{",\n  { "}</span>
                                     <span className="text-foreground">{"method: "}</span>
                                     <span className="text-emerald-400">{'"POST"'}</span>
@@ -192,7 +192,7 @@ export function LandingPage() {
                                     <span className="text-yellow-300">{"stringify"}</span>
                                     <span className="text-foreground">{"({\n"}</span>
                                     <span className="text-foreground">{"      model: "}</span>
-                                    <span className="text-emerald-400">{'"anthropic/claude-sonnet-4-5"'}</span>
+                                    <span className="text-emerald-400">{'"google/gemini-3-flash-preview5"'}</span>
                                     <span className="text-foreground">{",\n      messages: [{ role: "}</span>
                                     <span className="text-emerald-400">{'"user"'}</span>
                                     <span className="text-foreground">{", content: "}</span>
