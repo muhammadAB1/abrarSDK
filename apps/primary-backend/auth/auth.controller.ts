@@ -1,7 +1,7 @@
 import { type Request, type Response } from 'express'
 import { AuthModelSignin, AuthModelSignup } from './types'
 import { prisma } from 'db'
-import { setAuthCookie } from './session'
+import { clearAuthCookieOptions, setAuthCookie } from './session'
 
 export const signin = async (req: Request, res: Response) => {
     try {
@@ -79,7 +79,7 @@ export const me = async (req: Request, res: Response) => {
 }
 
 export const logout = async (_req: Request, res: Response) => {
-    res.clearCookie('auth')
+    res.clearCookie('auth', clearAuthCookieOptions)
     res.status(200).json({ message: 'Signed out successfully' })
 }
 
