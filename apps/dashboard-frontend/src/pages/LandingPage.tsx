@@ -197,7 +197,9 @@ export function LandingPage() {
                                     <span className="text-emerald-400">{'"user"'}</span>
                                     <span className="text-foreground">{", content: "}</span>
                                     <span className="text-emerald-400">{'"Hello!"'}</span>
-                                    <span className="text-foreground">{" }]\n    })\n  }\n)"}</span>
+                                    <span className="text-foreground">{" }]\n    }),\n    headers: {\n      Authorization: "}</span>
+                                    <span className="text-emerald-400">{'"Bearer your_api_key"'}</span>
+                                    <span className="text-foreground">{"\n    }\n  }\n)"}</span>
                                 </code>
                             </pre>
                         </div>
